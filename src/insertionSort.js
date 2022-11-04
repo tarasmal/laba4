@@ -9,5 +9,5 @@ export default function insertionSort(inputArr) {
         }
         inputArr[j+1] = current;
     }
-    return inputArr;
+    return JSON.stringify(inputArr);
 }

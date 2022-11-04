@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Input from "./Input";
 import Button from "./Button";
+import insertionSort from "../insertionSort";
 
 const dateRegexp = /^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$/
 
@@ -8,6 +9,9 @@ const MainPage = () => {
     const [date, setDate] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+
+
+
     const onSubmitHandler = (e) => {
         e.preventDefault()
         if (!date || !password || !confirmPassword) return alert('Please, fill all fields!')
@@ -15,6 +19,7 @@ const MainPage = () => {
         if (password !== confirmPassword) return alert('Confirm password is not equal to password. Please enter it`s value correct!')
         alert(`Date: ${date}\n Password: ${password}\n Confirm password: ${confirmPassword}`)
     }
+
     return (
         <div style={{
             display: 'flex',
@@ -23,18 +28,22 @@ const MainPage = () => {
             alignItems: 'center',
             justifyContent: 'center',
             flexDirection: 'column',
+            rowGap: '30%',
 
         }}>
-            <form onSubmit={onSubmitHandler} >
-                <div style={{display: 'flex', flexDirection: 'column', rowGap: '5px'}}>
-                    <Input value={date} setValue={setDate} isRequired isDate/>
-                    <Input type={'password'} value={password} setValue={setPassword} isRequired placeholder={'Password'}/>
-                    <Input type={'password'} value={confirmPassword} setValue={setConfirmPassword} isRequired placeholder={'Confirm password'}/>
-                    <Button>
-                        Submit
-                    </Button>
-                </div>
-            </form>
+            <div style={{display: 'flex', flexDirection: 'column'}}>
+                <form onSubmit={onSubmitHandler} >
+                    <div style={{display: 'flex', flexDirection: 'column', rowGap: '5px'}}>
+                        <Input value={date} setValue={setDate} isRequired isDate/>
+                        <Input type={'password'} value={password} setValue={setPassword} isRequired placeholder={'Password'}/>
+                        <Input type={'password'} value={confirmPassword} setValue={setConfirmPassword} isRequired placeholder={'Confirm password'}/>
+                        <Button type={'submit'}>
+                            Submit
+                        </Button>
+                    </div>
+                </form>
+            </div>
+
         </div>
     );
 };
